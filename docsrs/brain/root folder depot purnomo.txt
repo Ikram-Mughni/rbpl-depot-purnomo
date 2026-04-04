@@ -1,0 +1,16 @@
+depot-purnomo/
+├── assets/             # File statis (CSS, JS, Gambar)
+├── config/             # Konfigurasi database & konstanta global
+├── includes/           # Komponen UI yang dipakai berulang (Header, Footer, Sidebar)
+├── logic/              # Skrip backend (Proses CRUD, Auth, Session)
+│   ├── auth/           # Khusus logika login & registrasi (Sprint 1)
+│   ├── orders/         # Logika pemesanan (Sprint 2)
+│   └── inventory/      # Logika stok (Sprint 3)
+├── views/              # Halaman tampilan untuk setiap Role
+│   ├── admin/
+│   ├── customer/
+│   ├── courier/
+│   └── owner/
+├── index.php           # Halaman landing / Login
+├── register.php        # Halaman registrasi pelanggan
+└── logout.php          # Skrip mengakhiri session
