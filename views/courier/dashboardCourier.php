@@ -27,14 +27,13 @@ $id_kurir = $_SESSION['id_user'];
             <th>ID Order</th>
             <th>Pelanggan</th>
             <th>No. Telepon</th>
-            <th>Alamat</th>
-            <th>Tipe Barang</th>
+            <th>Alamat & Titik Lokasi</th> <th>Tipe Barang</th>
             <th>Qty</th>
             <th>Aksi</th>
         </tr>
         <?php
-        // Query tetap sama karena sudah ada users.phone_number
-        $query = "SELECT orders.*, users.username, users.address, users.phone_number 
+        // Update Query untuk mengambil latitude dan longitude
+        $query = "SELECT orders.*, users.username, users.address, users.phone_number, users.latitude, users.longitude 
           FROM orders 
           JOIN users ON orders.id_user = users.id_user 
           WHERE orders.status = 'Diproses' OR (orders.status = 'Dikirim' AND orders.id_kurir = '$id_kurir')
@@ -52,7 +51,19 @@ $id_kurir = $_SESSION['id_user'];
                         📞 <?php echo $row['phone_number']; ?>
                     </a>
                 </td>
-                <td><?php echo $row['address']; ?></td>
+                <td>
+                    <strong>Detail:</strong> <?php echo $row['address']; ?><br><br>
+                    
+                    <?php if (!empty($row['latitude']) && !empty($row['longitude'])): ?>
+                        <a href="https://www.google.com/maps/search/?api=1&query=<?php echo $row['latitude']; ?>,<?php echo $row['longitude']; ?>" 
+                           target="_blank" 
+                           style="background: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px; font-size: 0.8em;">
+                           📍 Lihat di Maps
+                        </a>
+                    <?php else: ?>
+                        <span style="color: gray; font-size: 0.8em;">(Titik GPS tidak tersedia)</span>
+                    <?php endif; ?>
+                </td>
                 <td><?php echo $row['order_type']; ?></td>
                 <td><?php echo $row['quantity']; ?></td>
                 <td>
