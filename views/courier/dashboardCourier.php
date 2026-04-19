@@ -26,13 +26,14 @@ $id_kurir = $_SESSION['id_user'];
         <tr style="background: #eee;">
             <th>ID Order</th>
             <th>Pelanggan</th>
+            <th>No. Telepon</th>
             <th>Alamat</th>
             <th>Tipe Barang</th>
             <th>Qty</th>
             <th>Aksi</th>
         </tr>
         <?php
-        // Ambil pesanan yang statusnya 'Diproses' (siap kirim) atau 'Dikirim' (milik kurir ini)
+        // Query tetap sama karena sudah ada users.phone_number
         $query = "SELECT orders.*, users.username, users.address, users.phone_number 
           FROM orders 
           JOIN users ON orders.id_user = users.id_user 
@@ -46,6 +47,11 @@ $id_kurir = $_SESSION['id_user'];
             <tr>
                 <td>#<?php echo $row['id_order']; ?></td>
                 <td><?php echo $row['username']; ?></td>
+                <td>
+                    <a href="https://wa.me/<?php echo $row['phone_number']; ?>" target="_blank" style="color: green; text-decoration: none;">
+                        📞 <?php echo $row['phone_number']; ?>
+                    </a>
+                </td>
                 <td><?php echo $row['address']; ?></td>
                 <td><?php echo $row['order_type']; ?></td>
                 <td><?php echo $row['quantity']; ?></td>

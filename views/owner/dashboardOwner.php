@@ -1,10 +1,6 @@
-<?php
-session_start();
-if ($_SESSION['role'] !== 'Owner') {
-    header("Location: ../../index.php");
-    exit();
-}
-?>
-<h1>Laporan Bisnis Owner, <?php echo $_SESSION['username']; ?></h1>
-<p>Pantau grafik penjualan dan performa Depot Purnomo di sini.</p>
-<a href="../../logout.php">Logout</a>
+<div class="menu-owner" style="margin-top: 20px;">
+    <h3>Selamat Datang, Owner.</h3>
+    <a href="reportSales.php" style="display: inline-block; padding: 20px; background: #333; color: white; text-decoration: none; border-radius: 10px;">
+        📊 Lihat Laporan Keuangan & Grafik Penjualan
+    </a>
+</div>

@@ -37,23 +37,49 @@ if (isset($_POST['action']) && $_POST['action'] == 'konfirmasi_foto') {
     $ext_boleh = ['jpg', 'jpeg', 'png'];
 
     if (in_array($ekstensi, $ext_boleh)) {
-        // Buat nama file unik: bukti_IDORDER_WAKTU.jpg
+        // Buat nama file unik
         $namaBaru = "bukti_" . $id_order . "_" . time() . "." . $ekstensi;
         $tujuan   = "../../uploads/" . $namaBaru;
 
         if (move_uploaded_file($tmpName, $tujuan)) {
-            // Jika upload sukses, update status dan simpan nama file fotonya
-            $query = "UPDATE orders SET status = 'Selesai', delivery_proof = '$namaBaru' WHERE id_order = '$id_order'";
+            // Update status di tabel orders
+            $query_update = "UPDATE orders SET status = 'Selesai', delivery_proof = '$namaBaru' WHERE id_order = '$id_order'";
 
-            if (mysqli_query($conn, $query)) {
+            if (mysqli_query($conn, $query_update)) {
+
+                // --- AWAL IMPLEMENTASI PBI-029 (LOG TRANSAKSI OTOMATIS) ---
+
+                // Ambil detail data pesanan untuk dimasukkan ke jurnal/log
+                $sql_get = "SELECT orders.id_order, orders.order_type, orders.total_price, users.username 
+                            FROM orders 
+                            JOIN users ON orders.id_user = users.id_user 
+                            WHERE orders.id_order = '$id_order'";
+
+                $result_get = mysqli_query($conn, $sql_get);
+                $data_ord = mysqli_fetch_assoc($result_get);
+
+                if ($data_ord) {
+                    $c_name = $data_ord['username'];
+                    $o_type = $data_ord['order_type'];
+                    $amount = $data_ord['total_price'];
+
+                    // Masukkan ke tabel transaction_logs (PBI-028 & PBI-029)
+                    $sql_log = "INSERT INTO transaction_logs (id_order, customer_name, order_type, amount) 
+                                VALUES ('$id_order', '$c_name', '$o_type', '$amount')";
+
+                    mysqli_query($conn, $sql_log);
+                }
+
+                // --- AKHIR IMPLEMENTASI PBI-029 ---
+
                 header("Location: ../../views/courier/dashboardCourier.php?msg=delivered");
             } else {
                 echo "Gagal Update Database: " . mysqli_error($conn);
             }
         } else {
-            echo "Gagal mengunggah file. Pastikan folder 'uploads' tersedia di root proyek.";
+            echo "Gagal mengunggah file. Pastikan folder 'uploads' tersedia.";
         }
     } else {
-        echo "Format file tidak didukung! Gunakan JPG, JPEG, atau PNG.";
+        echo "Format file tidak didukung!";
     }
 }

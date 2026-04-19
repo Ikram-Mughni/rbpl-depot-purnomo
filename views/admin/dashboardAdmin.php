@@ -21,10 +21,18 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Admin') {
     <p>Selamat bekerja, <strong><?php echo $_SESSION['username']; ?></strong> | <a href="../../logout.php">Logout</a></p>
     <hr>
 
-    <nav style="background: #333; padding: 10px; margin-bottom: 20px;">
+    <nav style="background: #333; padding: 15px; margin-bottom: 20px; border-radius: 5px; display: flex; align-items: center;">
         <a href="dashboardAdmin.php" style="color: white; text-decoration: none; margin-right: 20px;">🏠 Dashboard Utama</a>
+
         <a href="stockHistory.php" style="color: white; text-decoration: none; margin-right: 20px;">📜 Histori Stok (PBI-017)</a>
-        <a href="reportSales.php" style="color: white; text-decoration: none;">📊 Laporan Penjualan</a>
+
+        <a href="reportSales.php" style="color: white; text-decoration: none; margin-right: 20px;">📊 Laporan Penjualan</a>
+
+        <a href="dashboardMonitoring.php" style="background: #007bff; color: white; text-decoration: none; padding: 8px 15px; border-radius: 4px; font-weight: bold; margin-left: auto;">
+            📈 Monitoring Transaksi
+        </a>
+
+        <a href="../../logout.php" style="color: #ff4d4d; text-decoration: none; margin-left: 20px; font-size: 0.9em;">🚪 Logout</a>
     </nav>
 
     <h3>📦 Inventaris Stok Barang</h3>
