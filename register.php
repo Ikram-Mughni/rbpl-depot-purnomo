@@ -194,10 +194,10 @@
         <form action="/rbpl-depot-purnomo/logic/auth/registerProcess.php" method="POST" id="regForm">
             
             <label>Nama Lengkap</label>
-            <input type="text" name="nama_lengkap" placeholder="Contoh: Budi Santoso" required>
+            <input type="text" name="nama_lengkap" placeholder="Masukkan nama anda..." required>
 
             <label>No Telepon</label>
-            <input type="text" name="phone_number" placeholder="0812xxxx" required>
+            <input type="text" name="phone_number" placeholder="Masukkan nomor telp anda..." required>
 
             <label>Pilih Lokasi Alamat</label>
             <div id="map"></div>
@@ -208,10 +208,10 @@
             <input type="hidden" name="longitude" id="lng">
 
             <label>Username</label>
-            <input type="text" name="username" placeholder="Untuk login" required>
+            <input type="text" name="username" placeholder="Buat username..." required>
 
             <label>Password</label>
-            <input type="password" name="password" placeholder="Min. 6 karakter" required>
+            <input type="password" name="password" placeholder="Buat password..." required>
 
             <div class="btn-container">
                 <button type="submit" name="register" id="btnSubmit">Daftar</button>
@@ -270,7 +270,7 @@
             btn.disabled = false;
             msg.style.display = "none";
             addr.readOnly = false;
-            addr.placeholder = "Masukkan detail (No. Rumah / Nama Gang)...";
+            addr.placeholder = "Masukkan alamat detail (No. Rumah / Nama Gang)...";
         }
     });
 </script>
