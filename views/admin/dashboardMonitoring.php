@@ -173,7 +173,6 @@ $username = $_SESSION['username'];
         <ul class="sidebar-menu">
             <li><a href="dashboardAdmin.php"><i class="fa-solid fa-gauge"></i> Dashboard Utama</a></li>
             <li><a href="stockHistory.php"><i class="fa-solid fa-history"></i> Histori Stok</a></li>
-            <li><a href="reportSales.php"><i class="fa-solid fa-file-invoice-dollar"></i> Laporan Penjualan</a></li>
             <li><a href="dashboardMonitoring.php" class="active"><i class="fa-solid fa-desktop"></i> Monitoring Transaksi</a></li>
         </ul>
         <div style="padding: 20px;">

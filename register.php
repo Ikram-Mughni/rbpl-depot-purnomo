@@ -226,8 +226,8 @@
 
 <script>
     // Koordinat Pusat Depot
-    const depotLat = -7.7744; 
-    const depotLng = 110.4135;
+    const depotLat = -7.7743858031457025; 
+    const depotLng = 110.42450826586945;
     const maxRadius = 5000; 
 
     const map = L.map('map', { zoomControl: false }).setView([depotLat, depotLng], 13);
